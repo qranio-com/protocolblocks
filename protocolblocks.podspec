@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
-  s.name         = "protocolblocks""
+  s.name         = "protocolblocks"
   s.version      = "0.0.1"
   s.summary      = "Replacing delegates in iOS with blocks."
-  s.homepage     = "https://github.com/alexeylang/protocolblocks"
+  s.homepage     = "https://github.com/c-rack/protocolblocks"
   s.license      = 'MIT'
-  s.author       = { "Alexey Lang" => "alekseylang@gmail.com" }
+  s.author       = { "Constantin" => "http://constant.in" }
 
   s.platform              = :ios, '5.0'
   s.ios.deployment_target = '5.0'
