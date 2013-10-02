@@ -1,4 +1,4 @@
-# protocolblocks-ui
+# protocolblocks-uikit
 
 ### Replacing delegates in iOS with blocks. (only UIKit)
 
