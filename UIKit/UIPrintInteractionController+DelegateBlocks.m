@@ -31,7 +31,7 @@ static NSString* UIPrintInteractionControllerDelegateBlocksKey = @"UIPrintIntera
 @implementation UIPrintInteractionController (DelegateBlocks)
 
 -(id)useBlocksForDelegate {
-    UIPrintInteractionControllerDelegateBlocks* delegate = [[[UIPrintInteractionControllerDelegateBlocks alloc] init] autorelease];
+    UIPrintInteractionControllerDelegateBlocks* delegate = [[UIPrintInteractionControllerDelegateBlocks alloc] init];
     objc_setAssociatedObject (self, &UIPrintInteractionControllerDelegateBlocksKey, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     self.delegate = delegate;
     return self;
@@ -106,51 +106,43 @@ static NSString* UIPrintInteractionControllerDelegateBlocksKey = @"UIPrintIntera
 -(UIPrintPaper*)printInteractionController:(UIPrintInteractionController*)printInteractionController choosePaper:(NSArray*)paperList  {
     UIPrintInteractionControllerChoosePaperBlock block = [self.choosePaperBlock copy];
     UIPrintPaper* result = block(printInteractionController, paperList);
-    [block release];
     return result;
 }
 
 -(void)printInteractionControllerDidDismissPrinterOptions:(UIPrintInteractionController*)printInteractionController  {
     UIPrintInteractionControllerDidDismissPrinterOptionsBlock block = [self.didDismissPrinterOptionsBlock copy];
     block(printInteractionController);
-    [block release];
 }
 
 -(void)printInteractionControllerDidFinishJob:(UIPrintInteractionController*)printInteractionController  {
     UIPrintInteractionControllerDidFinishJobBlock block = [self.didFinishJobBlock copy];
     block(printInteractionController);
-    [block release];
 }
 
 -(void)printInteractionControllerDidPresentPrinterOptions:(UIPrintInteractionController*)printInteractionController  {
     UIPrintInteractionControllerDidPresentPrinterOptionsBlock block = [self.didPresentPrinterOptionsBlock copy];
     block(printInteractionController);
-    [block release];
 }
 
 -(UIViewController*)printInteractionControllerParentViewController:(UIPrintInteractionController*)printInteractionController  {
     UIPrintInteractionControllerParentViewControllerBlock block = [self.parentViewControllerBlock copy];
     UIViewController* result = block(printInteractionController);
-    [block release];
     return result;
 }
 
 -(void)printInteractionControllerWillDismissPrinterOptions:(UIPrintInteractionController*)printInteractionController  {
     UIPrintInteractionControllerWillDismissPrinterOptionsBlock block = [self.willDismissPrinterOptionsBlock copy];
     block(printInteractionController);
-    [block release];
 }
 
 -(void)printInteractionControllerWillPresentPrinterOptions:(UIPrintInteractionController*)printInteractionController  {
     UIPrintInteractionControllerWillPresentPrinterOptionsBlock block = [self.willPresentPrinterOptionsBlock copy];
     block(printInteractionController);
-    [block release];
 }
 
 -(void)printInteractionControllerWillStartJob:(UIPrintInteractionController*)printInteractionController  {
     UIPrintInteractionControllerWillStartJobBlock block = [self.willStartJobBlock copy];
     block(printInteractionController);
-    [block release];
 }
 
 @end

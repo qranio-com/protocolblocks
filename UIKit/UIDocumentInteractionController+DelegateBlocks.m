@@ -31,7 +31,7 @@ static NSString* UIDocumentInteractionControllerDelegateBlocksKey = @"UIDocument
 @implementation UIDocumentInteractionController (DelegateBlocks)
 
 -(id)useBlocksForDelegate {
-    UIDocumentInteractionControllerDelegateBlocks* delegate = [[[UIDocumentInteractionControllerDelegateBlocks alloc] init] autorelease];
+    UIDocumentInteractionControllerDelegateBlocks* delegate = [[UIDocumentInteractionControllerDelegateBlocks alloc] init];
     objc_setAssociatedObject (self, &UIDocumentInteractionControllerDelegateBlocksKey, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     self.delegate = delegate;
     return self;
@@ -141,84 +141,71 @@ static NSString* UIDocumentInteractionControllerDelegateBlocksKey = @"UIDocument
 -(BOOL)documentInteractionController:(UIDocumentInteractionController*)controller canPerformAction:(SEL)action  {
     UIDocumentInteractionControllerCanPerformActionBlock block = [self.canPerformActionBlock copy];
     BOOL result = block(controller, action);
-    [block release];
     return result;
 }
 
 -(void)documentInteractionController:(UIDocumentInteractionController*)controller didEndSendingToApplication:(NSString*)application  {
     UIDocumentInteractionControllerDidEndSendingToApplicationBlock block = [self.didEndSendingToApplicationBlock copy];
     block(controller, application);
-    [block release];
 }
 
 -(BOOL)documentInteractionController:(UIDocumentInteractionController*)controller performAction:(SEL)action  {
     UIDocumentInteractionControllerPerformActionBlock block = [self.performActionBlock copy];
     BOOL result = block(controller, action);
-    [block release];
     return result;
 }
 
 -(void)documentInteractionController:(UIDocumentInteractionController*)controller willBeginSendingToApplication:(NSString*)application  {
     UIDocumentInteractionControllerWillBeginSendingToApplicationBlock block = [self.willBeginSendingToApplicationBlock copy];
     block(controller, application);
-    [block release];
 }
 
 -(void)documentInteractionControllerDidDismissOpenInMenu:(UIDocumentInteractionController*)controller  {
     UIDocumentInteractionControllerDidDismissOpenInMenuBlock block = [self.didDismissOpenInMenuBlock copy];
     block(controller);
-    [block release];
 }
 
 -(void)documentInteractionControllerDidDismissOptionsMenu:(UIDocumentInteractionController*)controller  {
     UIDocumentInteractionControllerDidDismissOptionsMenuBlock block = [self.didDismissOptionsMenuBlock copy];
     block(controller);
-    [block release];
 }
 
 -(void)documentInteractionControllerDidEndPreview:(UIDocumentInteractionController*)controller  {
     UIDocumentInteractionControllerDidEndPreviewBlock block = [self.didEndPreviewBlock copy];
     block(controller);
-    [block release];
 }
 
 -(CGRect)documentInteractionControllerRectForPreview:(UIDocumentInteractionController*)controller  {
     UIDocumentInteractionControllerRectForPreviewBlock block = [self.rectForPreviewBlock copy];
     CGRect result = block(controller);
-    [block release];
     return result;
 }
 
 -(UIViewController*)documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController*)controller  {
     UIDocumentInteractionControllerViewControllerForPreviewBlock block = [self.viewControllerForPreviewBlock copy];
     UIViewController* result = block(controller);
-    [block release];
     return result;
 }
 
 -(UIView*)documentInteractionControllerViewForPreview:(UIDocumentInteractionController*)controller  {
     UIDocumentInteractionControllerViewForPreviewBlock block = [self.viewForPreviewBlock copy];
     UIView* result = block(controller);
-    [block release];
     return result;
 }
 
 -(void)documentInteractionControllerWillBeginPreview:(UIDocumentInteractionController*)controller  {
     UIDocumentInteractionControllerWillBeginPreviewBlock block = [self.willBeginPreviewBlock copy];
     block(controller);
-    [block release];
 }
 
 -(void)documentInteractionControllerWillPresentOpenInMenu:(UIDocumentInteractionController*)controller  {
     UIDocumentInteractionControllerWillPresentOpenInMenuBlock block = [self.willPresentOpenInMenuBlock copy];
     block(controller);
-    [block release];
 }
 
 -(void)documentInteractionControllerWillPresentOptionsMenu:(UIDocumentInteractionController*)controller  {
     UIDocumentInteractionControllerWillPresentOptionsMenuBlock block = [self.willPresentOptionsMenuBlock copy];
     block(controller);
-    [block release];
 }
 
 @end

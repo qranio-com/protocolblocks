@@ -31,7 +31,7 @@ static NSString* UITabBarControllerDelegateBlocksKey = @"UITabBarControllerDeleg
 @implementation UITabBarController (DelegateBlocks)
 
 -(id)useBlocksForDelegate {
-    UITabBarControllerDelegateBlocks* delegate = [[[UITabBarControllerDelegateBlocks alloc] init] autorelease];
+    UITabBarControllerDelegateBlocks* delegate = [[UITabBarControllerDelegateBlocks alloc] init];
     objc_setAssociatedObject (self, &UITabBarControllerDelegateBlocksKey, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     self.delegate = delegate;
     return self;
@@ -85,32 +85,27 @@ static NSString* UITabBarControllerDelegateBlocksKey = @"UITabBarControllerDeleg
 -(void)tabBarController:(UITabBarController*)tabBarController didEndCustomizingViewControllers:(NSArray*)viewControllers changed:(BOOL)changed  {
     UITabBarControllerDidEndCustomizingViewControllersBlock block = [self.didEndCustomizingViewControllersBlock copy];
     block(tabBarController, viewControllers, changed);
-    [block release];
 }
 
 -(void)tabBarController:(UITabBarController*)tabBarController didSelectViewController:(UIViewController*)viewController  {
     UITabBarControllerDidSelectViewControllerBlock block = [self.didSelectViewControllerBlock copy];
     block(tabBarController, viewController);
-    [block release];
 }
 
 -(BOOL)tabBarController:(UITabBarController*)tabBarController shouldSelectViewController:(UIViewController*)viewController  {
     UITabBarControllerShouldSelectViewControllerBlock block = [self.shouldSelectViewControllerBlock copy];
     BOOL result = block(tabBarController, viewController);
-    [block release];
     return result;
 }
 
 -(void)tabBarController:(UITabBarController*)tabBarController willBeginCustomizingViewControllers:(NSArray*)viewControllers  {
     UITabBarControllerWillBeginCustomizingViewControllersBlock block = [self.willBeginCustomizingViewControllersBlock copy];
     block(tabBarController, viewControllers);
-    [block release];
 }
 
 -(void)tabBarController:(UITabBarController*)tabBarController willEndCustomizingViewControllers:(NSArray*)viewControllers changed:(BOOL)changed  {
     UITabBarControllerWillEndCustomizingViewControllersBlock block = [self.willEndCustomizingViewControllersBlock copy];
     block(tabBarController, viewControllers, changed);
-    [block release];
 }
 
 @end

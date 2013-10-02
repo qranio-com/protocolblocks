@@ -31,7 +31,7 @@ static NSString* UIPickerViewDelegateBlocksKey = @"UIPickerViewDelegateBlocksKey
 @implementation UIPickerView (DelegateBlocks)
 
 -(id)useBlocksForDelegate {
-    UIPickerViewDelegateBlocks* delegate = [[[UIPickerViewDelegateBlocks alloc] init] autorelease];
+    UIPickerViewDelegateBlocks* delegate = [[UIPickerViewDelegateBlocks alloc] init];
     objc_setAssociatedObject (self, &UIPickerViewDelegateBlocksKey, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     self.delegate = delegate;
     return self;
@@ -85,34 +85,29 @@ static NSString* UIPickerViewDelegateBlocksKey = @"UIPickerViewDelegateBlocksKey
 -(void)pickerView:(UIPickerView*)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component  {
     UIPickerViewDidSelectRowBlock block = [self.didSelectRowBlock copy];
     block(pickerView, row, component);
-    [block release];
 }
 
 -(CGFloat)pickerView:(UIPickerView*)pickerView rowHeightForComponent:(NSInteger)component  {
     UIPickerViewRowHeightForComponentBlock block = [self.rowHeightForComponentBlock copy];
     CGFloat result = block(pickerView, component);
-    [block release];
     return result;
 }
 
 -(NSString*)pickerView:(UIPickerView*)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component  {
     UIPickerViewTitleForRowBlock block = [self.titleForRowBlock copy];
     NSString* result = block(pickerView, row, component);
-    [block release];
     return result;
 }
 
 -(UIView*)pickerView:(UIPickerView*)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView*)view  {
     UIPickerViewViewForRowBlock block = [self.viewForRowBlock copy];
     UIView* result = block(pickerView, row, component, view);
-    [block release];
     return result;
 }
 
 -(CGFloat)pickerView:(UIPickerView*)pickerView widthForComponent:(NSInteger)component  {
     UIPickerViewWidthForComponentBlock block = [self.widthForComponentBlock copy];
     CGFloat result = block(pickerView, component);
-    [block release];
     return result;
 }
 

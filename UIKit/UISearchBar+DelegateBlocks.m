@@ -31,7 +31,7 @@ static NSString* UISearchBarDelegateBlocksKey = @"UISearchBarDelegateBlocksKey";
 @implementation UISearchBar (DelegateBlocks)
 
 -(id)useBlocksForDelegate {
-    UISearchBarDelegateBlocks* delegate = [[[UISearchBarDelegateBlocks alloc] init] autorelease];
+    UISearchBarDelegateBlocks* delegate = [[UISearchBarDelegateBlocks alloc] init];
     objc_setAssociatedObject (self, &UISearchBarDelegateBlocksKey, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     self.delegate = delegate;
     return self;
@@ -127,70 +127,59 @@ static NSString* UISearchBarDelegateBlocksKey = @"UISearchBarDelegateBlocksKey";
 -(void)searchBar:(UISearchBar*)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope  {
     UISearchBarSelectedScopeButtonIndexDidChangeBlock block = [self.selectedScopeButtonIndexDidChangeBlock copy];
     block(searchBar, selectedScope);
-    [block release];
 }
 
 -(BOOL)searchBar:(UISearchBar*)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString*)text  {
     UISearchBarShouldChangeTextInRangeBlock block = [self.shouldChangeTextInRangeBlock copy];
     BOOL result = block(searchBar, range, text);
-    [block release];
     return result;
 }
 
 -(void)searchBar:(UISearchBar*)searchBar textDidChange:(NSString*)searchText  {
     UISearchBarTextDidChangeBlock block = [self.textDidChangeBlock copy];
     block(searchBar, searchText);
-    [block release];
 }
 
 -(void)searchBarBookmarkButtonClicked:(UISearchBar*)searchBar  {
     UISearchBarBookmarkButtonClickedBlock block = [self.bookmarkButtonClickedBlock copy];
     block(searchBar);
-    [block release];
 }
 
 -(void)searchBarCancelButtonClicked:(UISearchBar*)searchBar  {
     UISearchBarCancelButtonClickedBlock block = [self.cancelButtonClickedBlock copy];
     block(searchBar);
-    [block release];
 }
 
 -(void)searchBarResultsListButtonClicked:(UISearchBar*)searchBar  {
     UISearchBarResultsListButtonClickedBlock block = [self.resultsListButtonClickedBlock copy];
     block(searchBar);
-    [block release];
 }
 
 -(void)searchBarSearchButtonClicked:(UISearchBar*)searchBar  {
     UISearchBarSearchButtonClickedBlock block = [self.searchButtonClickedBlock copy];
     block(searchBar);
-    [block release];
 }
 
 -(BOOL)searchBarShouldBeginEditing:(UISearchBar*)searchBar  {
     UISearchBarShouldBeginEditingBlock block = [self.shouldBeginEditingBlock copy];
     BOOL result = block(searchBar);
-    [block release];
     return result;
 }
 
 -(BOOL)searchBarShouldEndEditing:(UISearchBar*)searchBar  {
     UISearchBarShouldEndEditingBlock block = [self.shouldEndEditingBlock copy];
     BOOL result = block(searchBar);
-    [block release];
     return result;
 }
 
 -(void)searchBarTextDidBeginEditing:(UISearchBar*)searchBar  {
     UISearchBarTextDidBeginEditingBlock block = [self.textDidBeginEditingBlock copy];
     block(searchBar);
-    [block release];
 }
 
 -(void)searchBarTextDidEndEditing:(UISearchBar*)searchBar  {
     UISearchBarTextDidEndEditingBlock block = [self.textDidEndEditingBlock copy];
     block(searchBar);
-    [block release];
 }
 
 @end

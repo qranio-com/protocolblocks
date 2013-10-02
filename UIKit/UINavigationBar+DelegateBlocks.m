@@ -31,7 +31,7 @@ static NSString* UINavigationBarDelegateBlocksKey = @"UINavigationBarDelegateBlo
 @implementation UINavigationBar (DelegateBlocks)
 
 -(id)useBlocksForDelegate {
-    UINavigationBarDelegateBlocks* delegate = [[[UINavigationBarDelegateBlocks alloc] init] autorelease];
+    UINavigationBarDelegateBlocks* delegate = [[UINavigationBarDelegateBlocks alloc] init];
     objc_setAssociatedObject (self, &UINavigationBarDelegateBlocksKey, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     self.delegate = delegate;
     return self;
@@ -78,26 +78,22 @@ static NSString* UINavigationBarDelegateBlocksKey = @"UINavigationBarDelegateBlo
 -(void)navigationBar:(UINavigationBar*)navigationBar didPopItem:(UINavigationItem*)item  {
     UINavigationBarDidPopItemBlock block = [self.didPopItemBlock copy];
     block(navigationBar, item);
-    [block release];
 }
 
 -(void)navigationBar:(UINavigationBar*)navigationBar didPushItem:(UINavigationItem*)item  {
     UINavigationBarDidPushItemBlock block = [self.didPushItemBlock copy];
     block(navigationBar, item);
-    [block release];
 }
 
 -(BOOL)navigationBar:(UINavigationBar*)navigationBar shouldPopItem:(UINavigationItem*)item  {
     UINavigationBarShouldPopItemBlock block = [self.shouldPopItemBlock copy];
     BOOL result = block(navigationBar, item);
-    [block release];
     return result;
 }
 
 -(BOOL)navigationBar:(UINavigationBar*)navigationBar shouldPushItem:(UINavigationItem*)item  {
     UINavigationBarShouldPushItemBlock block = [self.shouldPushItemBlock copy];
     BOOL result = block(navigationBar, item);
-    [block release];
     return result;
 }
 

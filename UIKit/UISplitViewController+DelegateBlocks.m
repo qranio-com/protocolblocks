@@ -31,7 +31,7 @@ static NSString* UISplitViewControllerDelegateBlocksKey = @"UISplitViewControlle
 @implementation UISplitViewController (DelegateBlocks)
 
 -(id)useBlocksForDelegate {
-    UISplitViewControllerDelegateBlocks* delegate = [[[UISplitViewControllerDelegateBlocks alloc] init] autorelease];
+    UISplitViewControllerDelegateBlocks* delegate = [[UISplitViewControllerDelegateBlocks alloc] init];
     objc_setAssociatedObject (self, &UISplitViewControllerDelegateBlocksKey, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     self.delegate = delegate;
     return self;
@@ -71,19 +71,16 @@ static NSString* UISplitViewControllerDelegateBlocksKey = @"UISplitViewControlle
 -(void)splitViewController:(UISplitViewController*)svc popoverController:(UIPopoverController*)pc willPresentViewController:(UIViewController*)aViewController  {
     UISplitViewControllerWillPresentViewControllerBlock block = [self.willPresentViewControllerBlock copy];
     block(svc, pc, aViewController);
-    [block release];
 }
 
 -(void)splitViewController:(UISplitViewController*)svc willHideViewController:(UIViewController*)aViewController withBarButtonItem:(UIBarButtonItem*)barButtonItem forPopoverController:(UIPopoverController*)pc  {
     UISplitViewControllerWillHideViewControllerBlock block = [self.willHideViewControllerBlock copy];
     block(svc, aViewController, barButtonItem, pc);
-    [block release];
 }
 
 -(void)splitViewController:(UISplitViewController*)svc willShowViewController:(UIViewController*)aViewController invalidatingBarButtonItem:(UIBarButtonItem*)button  {
     UISplitViewControllerWillShowViewControllerBlock block = [self.willShowViewControllerBlock copy];
     block(svc, aViewController, button);
-    [block release];
 }
 
 @end

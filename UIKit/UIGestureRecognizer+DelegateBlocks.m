@@ -31,7 +31,7 @@ static NSString* UIGestureRecognizerDelegateBlocksKey = @"UIGestureRecognizerDel
 @implementation UIGestureRecognizer (DelegateBlocks)
 
 -(id)useBlocksForDelegate {
-    UIGestureRecognizerDelegateBlocks* delegate = [[[UIGestureRecognizerDelegateBlocks alloc] init] autorelease];
+    UIGestureRecognizerDelegateBlocks* delegate = [[UIGestureRecognizerDelegateBlocks alloc] init];
     objc_setAssociatedObject (self, &UIGestureRecognizerDelegateBlocksKey, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     self.delegate = delegate;
     return self;
@@ -71,21 +71,18 @@ static NSString* UIGestureRecognizerDelegateBlocksKey = @"UIGestureRecognizerDel
 -(BOOL)gestureRecognizer:(UIGestureRecognizer*)gestureRecognizer shouldReceiveTouch:(UITouch*)touch  {
     UIGestureRecognizerShouldReceiveTouchBlock block = [self.shouldReceiveTouchBlock copy];
     BOOL result = block(gestureRecognizer, touch);
-    [block release];
     return result;
 }
 
 -(BOOL)gestureRecognizer:(UIGestureRecognizer*)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer*)otherGestureRecognizer  {
     UIGestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizerBlock block = [self.shouldRecognizeSimultaneouslyWithGestureRecognizerBlock copy];
     BOOL result = block(gestureRecognizer, otherGestureRecognizer);
-    [block release];
     return result;
 }
 
 -(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer*)gestureRecognizer  {
     UIGestureRecognizerShouldBeginBlock block = [self.shouldBeginBlock copy];
     BOOL result = block(gestureRecognizer);
-    [block release];
     return result;
 }
 

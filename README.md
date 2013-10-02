@@ -1,6 +1,6 @@
-# protocolblocks
+# protocolblocks-ui
 
-### Replacing delegates in iOS with blocks..
+### Replacing delegates in iOS with blocks. (only UIKit)
 
 ## Motivation
 
@@ -23,15 +23,6 @@ This projects aims to backport blocks for all *old* delegates of iOS.
 
 Currently, blocks have been backported for the following delegates:
 
-* **EventKitUI**
-  * EKEventEditViewController delegate
-  * EKEventViewController delegate
-* **iAd**
-  * ADBannerView delegate
-  * ADInterstitialAd delegate
-* **MessageUI**
-  * MFMailComposeViewController delegate
-  * MFMessageComposeViewController delegate
 * **UIKit**
   * UIAccelerometer delegate
   * UIActionSheet delegate

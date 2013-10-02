@@ -31,7 +31,7 @@ static NSString* UITextViewDelegateBlocksKey = @"UITextViewDelegateBlocksKey";
 @implementation UITextView (DelegateBlocks)
 
 -(id)useBlocksForDelegate {
-    UITextViewDelegateBlocks* delegate = [[[UITextViewDelegateBlocks alloc] init] autorelease];
+    UITextViewDelegateBlocks* delegate = [[UITextViewDelegateBlocks alloc] init];
     objc_setAssociatedObject (self, &UITextViewDelegateBlocksKey, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     self.delegate = delegate;
     return self;
@@ -99,45 +99,38 @@ static NSString* UITextViewDelegateBlocksKey = @"UITextViewDelegateBlocksKey";
 -(BOOL)textView:(UITextView*)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text  {
     UITextViewShouldChangeTextInRangeBlock block = [self.shouldChangeTextInRangeBlock copy];
     BOOL result = block(textView, range, text);
-    [block release];
     return result;
 }
 
 -(void)textViewDidBeginEditing:(UITextView*)textView  {
     UITextViewDidBeginEditingBlock block = [self.didBeginEditingBlock copy];
     block(textView);
-    [block release];
 }
 
 -(void)textViewDidChange:(UITextView*)textView  {
     UITextViewDidChangeBlock block = [self.didChangeBlock copy];
     block(textView);
-    [block release];
 }
 
 -(void)textViewDidChangeSelection:(UITextView*)textView  {
     UITextViewDidChangeSelectionBlock block = [self.didChangeSelectionBlock copy];
     block(textView);
-    [block release];
 }
 
 -(void)textViewDidEndEditing:(UITextView*)textView  {
     UITextViewDidEndEditingBlock block = [self.didEndEditingBlock copy];
     block(textView);
-    [block release];
 }
 
 -(BOOL)textViewShouldBeginEditing:(UITextView*)textView  {
     UITextViewShouldBeginEditingBlock block = [self.shouldBeginEditingBlock copy];
     BOOL result = block(textView);
-    [block release];
     return result;
 }
 
 -(BOOL)textViewShouldEndEditing:(UITextView*)textView  {
     UITextViewShouldEndEditingBlock block = [self.shouldEndEditingBlock copy];
     BOOL result = block(textView);
-    [block release];
     return result;
 }
 

@@ -31,7 +31,7 @@ static NSString* UINavigationControllerDelegateBlocksKey = @"UINavigationControl
 @implementation UINavigationController (DelegateBlocks)
 
 -(id)useBlocksForDelegate {
-    UINavigationControllerDelegateBlocks* delegate = [[[UINavigationControllerDelegateBlocks alloc] init] autorelease];
+    UINavigationControllerDelegateBlocks* delegate = [[UINavigationControllerDelegateBlocks alloc] init]];
     objc_setAssociatedObject (self, &UINavigationControllerDelegateBlocksKey, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     self.delegate = delegate;
     return self;
@@ -64,13 +64,11 @@ static NSString* UINavigationControllerDelegateBlocksKey = @"UINavigationControl
 -(void)navigationController:(UINavigationController*)navigationController didShowViewController:(UIViewController*)viewController animated:(BOOL)animated  {
     UINavigationControllerDidShowViewControllerBlock block = [self.didShowViewControllerBlock copy];
     block(navigationController, viewController, animated);
-    [block release];
 }
 
 -(void)navigationController:(UINavigationController*)navigationController willShowViewController:(UIViewController*)viewController animated:(BOOL)animated  {
     UINavigationControllerWillShowViewControllerBlock block = [self.willShowViewControllerBlock copy];
     block(navigationController, viewController, animated);
-    [block release];
 }
 
 @end

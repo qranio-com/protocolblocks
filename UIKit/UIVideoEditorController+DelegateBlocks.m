@@ -31,7 +31,7 @@ static NSString* UIVideoEditorControllerDelegateBlocksKey = @"UIVideoEditorContr
 @implementation UIVideoEditorController (DelegateBlocks)
 
 -(id)useBlocksForDelegate {
-    UIVideoEditorControllerDelegateBlocks* delegate = [[[UIVideoEditorControllerDelegateBlocks alloc] init] autorelease];
+    UIVideoEditorControllerDelegateBlocks* delegate = [[UIVideoEditorControllerDelegateBlocks alloc] init];
     objc_setAssociatedObject (self, &UIVideoEditorControllerDelegateBlocksKey, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     self.delegate = delegate;
     return self;
@@ -85,31 +85,26 @@ static NSString* UIVideoEditorControllerDelegateBlocksKey = @"UIVideoEditorContr
 -(void)videoEditorController:(UIVideoEditorController*)editor didFailWithError:(NSError*)error  {
     UIVideoEditorControllerDidFailWithErrorBlock block = [self.didFailWithErrorBlock copy];
     block(editor, error);
-    [block release];
 }
 
 -(void)videoEditorController:(UIVideoEditorController*)editor didSaveEditedVideoToPath:(NSString*)editedVideoPath  {
     UIVideoEditorControllerDidSaveEditedVideoToPathBlock block = [self.didSaveEditedVideoToPathBlock copy];
     block(editor, editedVideoPath);
-    [block release];
 }
 
 -(void)videoEditorControllerDidCancel:(UIVideoEditorController*)editor  {
     UIVideoEditorControllerDidCancelBlock block = [self.didCancelBlock copy];
     block(editor);
-    [block release];
 }
 
 -(void)navigationController:(UINavigationController*)navigationController didShowViewController:(UIViewController*)viewController animated:(BOOL)animated  {
     UIVideoEditorControllerDidShowViewControllerBlock block = [self.didShowViewControllerBlock copy];
     block(navigationController, viewController, animated);
-    [block release];
 }
 
 -(void)navigationController:(UINavigationController*)navigationController willShowViewController:(UIViewController*)viewController animated:(BOOL)animated  {
     UIVideoEditorControllerWillShowViewControllerBlock block = [self.willShowViewControllerBlock copy];
     block(navigationController, viewController, animated);
-    [block release];
 }
 
 @end

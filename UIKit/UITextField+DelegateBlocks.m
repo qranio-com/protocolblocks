@@ -31,7 +31,7 @@ static NSString* UITextFieldDelegateBlocksKey = @"UITextFieldDelegateBlocksKey";
 @implementation UITextField (DelegateBlocks)
 
 -(id)useBlocksForDelegate {
-    UITextFieldDelegateBlocks* delegate = [[[UITextFieldDelegateBlocks alloc] init] autorelease];
+    UITextFieldDelegateBlocks* delegate = [[UITextFieldDelegateBlocks alloc] init];
     objc_setAssociatedObject (self, &UITextFieldDelegateBlocksKey, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     self.delegate = delegate;
     return self;
@@ -99,47 +99,40 @@ static NSString* UITextFieldDelegateBlocksKey = @"UITextFieldDelegateBlocksKey";
 -(BOOL)textField:(UITextField*)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string  {
     UITextFieldShouldChangeCharactersInRangeBlock block = [self.shouldChangeCharactersInRangeBlock copy];
     BOOL result = block(textField, range, string);
-    [block release];
     return result;
 }
 
 -(void)textFieldDidBeginEditing:(UITextField*)textField  {
     UITextFieldDidBeginEditingBlock block = [self.didBeginEditingBlock copy];
     block(textField);
-    [block release];
 }
 
 -(void)textFieldDidEndEditing:(UITextField*)textField  {
     UITextFieldDidEndEditingBlock block = [self.didEndEditingBlock copy];
     block(textField);
-    [block release];
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField*)textField  {
     UITextFieldShouldBeginEditingBlock block = [self.shouldBeginEditingBlock copy];
     BOOL result = block(textField);
-    [block release];
     return result;
 }
 
 -(BOOL)textFieldShouldClear:(UITextField*)textField  {
     UITextFieldShouldClearBlock block = [self.shouldClearBlock copy];
     BOOL result = block(textField);
-    [block release];
     return result;
 }
 
 -(BOOL)textFieldShouldEndEditing:(UITextField*)textField  {
     UITextFieldShouldEndEditingBlock block = [self.shouldEndEditingBlock copy];
     BOOL result = block(textField);
-    [block release];
     return result;
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField*)textField  {
     UITextFieldShouldReturnBlock block = [self.shouldReturnBlock copy];
     BOOL result = block(textField);
-    [block release];
     return result;
 }
 

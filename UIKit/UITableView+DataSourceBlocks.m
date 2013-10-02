@@ -31,7 +31,7 @@ static NSString* UITableViewDataSourceBlocksKey = @"UITableViewDataSourceBlocksK
 @implementation UITableView (DataSourceBlocks)
 
 -(id)useBlocksForDataSource {
-    UITableViewDataSourceBlocks* dataSource = [[[UITableViewDataSourceBlocks alloc] init] autorelease];
+    UITableViewDataSourceBlocks* dataSource = [[UITableViewDataSourceBlocks alloc] init];
     objc_setAssociatedObject (self, &UITableViewDataSourceBlocksKey, dataSource, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     self.dataSource = dataSource;
     return self;
@@ -127,75 +127,64 @@ static NSString* UITableViewDataSourceBlocksKey = @"UITableViewDataSourceBlocksK
 -(NSInteger)numberOfSectionsInTableView:(UITableView*)tableView  {
     UITableViewNumberOfSectionsInTableViewBlock block = [self.numberOfSectionsInTableViewBlock copy];
     NSInteger result = block(tableView);
-    [block release];
     return result;
 }
 
 -(NSArray*)sectionIndexTitlesForTableView:(UITableView*)tableView  {
     UITableViewSectionIndexTitlesForTableViewBlock block = [self.sectionIndexTitlesForTableViewBlock copy];
     NSArray* result = block(tableView);
-    [block release];
     return result;
 }
 
 -(BOOL)tableView:(UITableView*)tableView canEditRowAtIndexPath:(NSIndexPath*)indexPath  {
     UITableViewCanEditRowAtIndexPathBlock block = [self.canEditRowAtIndexPathBlock copy];
     BOOL result = block(tableView, indexPath);
-    [block release];
     return result;
 }
 
 -(BOOL)tableView:(UITableView*)tableView canMoveRowAtIndexPath:(NSIndexPath*)indexPath  {
     UITableViewCanMoveRowAtIndexPathBlock block = [self.canMoveRowAtIndexPathBlock copy];
     BOOL result = block(tableView, indexPath);
-    [block release];
     return result;
 }
 
 -(UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath  {
     UITableViewCellForRowAtIndexPathBlock block = [self.cellForRowAtIndexPathBlock copy];
     UITableViewCell* result = block(tableView, indexPath);
-    [block release];
     return result;
 }
 
 -(void)tableView:(UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath*)indexPath  {
     UITableViewCommitEditingStyleBlock block = [self.commitEditingStyleBlock copy];
     block(tableView, editingStyle, indexPath);
-    [block release];
 }
 
 -(void)tableView:(UITableView*)tableView moveRowAtIndexPath:(NSIndexPath*)fromIndexPath toIndexPath:(NSIndexPath*)toIndexPath  {
     UITableViewMoveRowAtIndexPathBlock block = [self.moveRowAtIndexPathBlock copy];
     block(tableView, fromIndexPath, toIndexPath);
-    [block release];
 }
 
 -(NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section  {
     UITableViewNumberOfRowsInSectionBlock block = [self.numberOfRowsInSectionBlock copy];
     NSInteger result = block(tableView, section);
-    [block release];
     return result;
 }
 
 -(NSInteger)tableView:(UITableView*)tableView sectionForSectionIndexTitle:(NSString*)title atIndex:(NSInteger)index  {
     UITableViewSectionForSectionIndexTitleBlock block = [self.sectionForSectionIndexTitleBlock copy];
     NSInteger result = block(tableView, title, index);
-    [block release];
     return result;
 }
 
 -(NSString*)tableView:(UITableView*)tableView titleForFooterInSection:(NSInteger)section  {
     UITableViewTitleForFooterInSectionBlock block = [self.titleForFooterInSectionBlock copy];
     NSString* result = block(tableView, section);
-    [block release];
     return result;
 }
 
 -(NSString*)tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section  {
     UITableViewTitleForHeaderInSectionBlock block = [self.titleForHeaderInSectionBlock copy];
     NSString* result = block(tableView, section);
-    [block release];
     return result;
 }
 

@@ -31,7 +31,7 @@ static NSString* UIAlertViewDelegateBlocksKey = @"UIAlertViewDelegateBlocksKey";
 @implementation UIAlertView (DelegateBlocks)
 
 -(id)useBlocksForDelegate {
-    UIAlertViewDelegateBlocks* delegate = [[[UIAlertViewDelegateBlocks alloc] init] autorelease];
+    UIAlertViewDelegateBlocks* delegate = [[UIAlertViewDelegateBlocks alloc] init];
     objc_setAssociatedObject (self, &UIAlertViewDelegateBlocksKey, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     self.delegate = delegate;
     return self;
@@ -92,37 +92,31 @@ static NSString* UIAlertViewDelegateBlocksKey = @"UIAlertViewDelegateBlocksKey";
 -(void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex  {
     UIAlertViewClickedButtonAtIndexBlock block = [self.clickedButtonAtIndexBlock copy];
     block(alertView, buttonIndex);
-    [block release];
 }
 
 -(void)alertView:(UIAlertView*)alertView didDissmissWithButtonIndex:(NSInteger)buttonIndex  {
     UIAlertViewDidDismissWithButtonIndexBlock block = [self.didDismissWithButtonIndexBlock copy];
     block(alertView, buttonIndex);
-    [block release];
 }
 
 -(void)alertView:(UIAlertView*)alertView willDissmissWithButtonIndex:(NSInteger)buttonIndex  {
     UIAlertViewWillDismissWithButtonIndexBlock block = [self.willDismissWithButtonIndexBlock copy];
     block(alertView, buttonIndex);
-    [block release];
 }
 
 -(void)alertViewCancel:(UIAlertView*)alertView  {
     UIAlertViewCancelBlock block = [self.cancelBlock copy];
     block(alertView);
-    [block release];
 }
 
 -(void)didPresentAlertView:(UIAlertView*)alertView  {
     UIAlertViewDidPresentAlertViewBlock block = [self.didPresentAlertViewBlock copy];
     block(alertView);
-    [block release];
 }
 
 -(void)willPresentAlertView:(UIAlertView*)alertView  {
     UIAlertViewWillPresentAlertViewBlock block = [self.willPresentAlertViewBlock copy];
     block(alertView);
-    [block release];
 }
 
 @end

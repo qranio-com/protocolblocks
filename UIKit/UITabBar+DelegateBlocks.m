@@ -31,7 +31,7 @@ static NSString* UITabBarDelegateBlocksKey = @"UITabBarDelegateBlocksKey";
 @implementation UITabBar (DelegateBlocks)
 
 -(id)useBlocksForDelegate {
-    UITabBarDelegateBlocks* delegate = [[[UITabBarDelegateBlocks alloc] init] autorelease];
+    UITabBarDelegateBlocks* delegate = [[UITabBarDelegateBlocks alloc] init];
     objc_setAssociatedObject (self, &UITabBarDelegateBlocksKey, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     self.delegate = delegate;
     return self;
@@ -85,31 +85,26 @@ static NSString* UITabBarDelegateBlocksKey = @"UITabBarDelegateBlocksKey";
 -(void)tabBar:(UITabBar*)tabBar didBeginCustomizingItems:(NSArray*)items  {
     UITabBarDidBeginCustomizingItemsBlock block = [self.didBeginCustomizingItemsBlock copy];
     block(tabBar, items);
-    [block release];
 }
 
 -(void)tabBar:(UITabBar*)tabBar didEndCustomizingItems:(NSArray*)items changed:(BOOL)changed  {
     UITabBarDidEndCustomizingItemsBlock block = [self.didEndCustomizingItemsBlock copy];
     block(tabBar, items, changed);
-    [block release];
 }
 
 -(void)tabBar:(UITabBar*)tabBar didSelectItem:(UITabBarItem*)item  {
     UITabBarDidSelectItemBlock block = [self.didSelectItemBlock copy];
     block(tabBar, item);
-    [block release];
 }
 
 -(void)tabBar:(UITabBar*)tabBar willBeginCustomizingItems:(NSArray*)items  {
     UITabBarWillBeginCustomizingItemsBlock block = [self.willBeginCustomizingItemsBlock copy];
     block(tabBar, items);
-    [block release];
 }
 
 -(void)tabBar:(UITabBar*)tabBar willEndCustomizingItems:(NSArray*)items changed:(BOOL)changed  {
     UITabBarWillEndCustomizingItemsBlock block = [self.willEndCustomizingItemsBlock copy];
     block(tabBar, items, changed);
-    [block release];
 }
 
 @end

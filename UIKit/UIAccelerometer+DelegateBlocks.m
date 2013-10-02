@@ -31,7 +31,7 @@ static NSString* UIAccelerometerDelegateBlocksKey = @"UIAccelerometerDelegateBlo
 @implementation UIAccelerometer (DelegateBlocks)
 
 -(id)useBlocksForDelegate {
-    UIAccelerometerDelegateBlocks* delegate = [[[UIAccelerometerDelegateBlocks alloc] init] autorelease];
+    UIAccelerometerDelegateBlocks* delegate = [[UIAccelerometerDelegateBlocks alloc] init];
     objc_setAssociatedObject (self, &UIAccelerometerDelegateBlocksKey, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     self.delegate = delegate;
     return self;
@@ -57,7 +57,6 @@ static NSString* UIAccelerometerDelegateBlocksKey = @"UIAccelerometerDelegateBlo
 -(void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration  {
     UIAccelerometerDidAccelerateBlock block = [self.didAccelerateBlock copy];
     block(accelerometer, acceleration);
-    [block release];
 }
 
 @end
